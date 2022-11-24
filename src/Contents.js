@@ -1,26 +1,51 @@
 import React, { useState } from 'react'
+import {FaTrashAlt} from  'react-icons/fa'
 
 const Contents = () => {
 
-    const [name, setName] = useState("Intial Name")
-    const handleNameChange = () => {
-        const names = ["bob", "lal", "skop"]
-        const int = Math.floor(Math.random() * 3)
-        setName(names[int])
+
+    const initItems = [
+        {
+            id: 1,
+            checked: true,
+            item: "One half pound bag of Cocoa Covered Almonds Unsalted"
+        },
+        {
+            id: 2,
+            checked: false,
+            item: "Item 2"
+        },
+        {
+            id: 3,
+            checked: false,
+            item: "Item 3"
+        }
+    ]
+    const [items, setItems] = useState(initItems)
+    const handleCheck = (id) => { 
+        const listItems = items.map((item) => 
+            item.id === id ?                        //if
+                {...item,checked: !item.checked}:   //true
+                item                                //else
+        );
+        setItems(listItems)
     }
-    const handleClick = () => { console.log("clicked") }
-    const handleClick2 = (name) => { console.log(`${name} was clicked`) }
-    const handleClick3 = (e) => { console.log(e) }
+
+
+
     return (
         <main>
-            <p>
-                Contents
-                Hello {name}
+            <ul>
+                {items.map((item)=> (
+                    <li className='item' key={item.id}>
+                        <input onChange={()=>handleCheck(item.id)} checked={item.checked } type="checkbox" />
+                    <label>{item.item}</label>
+                    <FaTrashAlt role="button" tabIndex="0"/>
+                    </li>
+                    
 
-            </p>
-            <button onClick={handleNameChange}>chaneg it</button>
-            <button onClick={()=> handleClick2("dafe")}>name</button>
-            <button onClick={(e) => handleClick3(e)}>name</button>
+                ))}
+            </ul>
         </main>
     )
 }
