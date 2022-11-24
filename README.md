@@ -71,7 +71,7 @@
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/anishmohant/ShoppingList.git
    ```
 2. Install NPM packages
    ```sh
@@ -97,7 +97,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 Anish Mohan - [LinkedIn](https://www.linkedin.com/in/anish-mohan-ba58a0187/) - anishmohant@gmail.com
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/anishmohant/ShoppingList](https://github.com/anishmohant/ShoppingList)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
