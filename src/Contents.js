@@ -31,25 +31,33 @@ const Contents = () => {
         setItems(listItems)
         localStorage.setItem('shoppinglist',JSON.stringify(listItems))
     }
+    const handleDelete = (id) => { 
+        const listItems = items.filter((item) => item.id!==id)
+        setItems(listItems)
+        localStorage.setItem('shoppinglist', JSON.stringify(listItems))
+    }
+
 
 
 
     return (
         <main>
-            <ul>
-                {items.map((item)=> (
-                    <li className='item' key={item.id}>
-                        <input onChange={()=>handleCheck(item.id)} checked={item.checked } type="checkbox" />
-                        <label style={(item.checked)?{textDecoration:'line-through'}:null }
-                         onDoubleClick={() => handleCheck(item.id)} >{item.item}</label>
-                    <FaTrashAlt role="button" tabIndex="0"/>
-                    </li>
-                    
+            {items.length?(
+                <ul>
+                    {items.map((item) => (
+                        <li className='item' key={item.id}>
+                            <input onChange={() => handleCheck(item.id)} checked={item.checked} type="checkbox" />
+                            <label style={(item.checked) ? { textDecoration: 'line-through' } : null}
+                                onDoubleClick={() => handleCheck(item.id)} >{item.item}</label>
+                            <FaTrashAlt onClick={() => handleDelete(item.id)} role="button" tabIndex="0" />
+                        </li>
 
-                ))}
-            </ul>
+
+                    ))}
+                </ul>
+            ):(<p>Empty</p>)}
         </main>
-    )
+    ) 
 }
 
 export default Contents
