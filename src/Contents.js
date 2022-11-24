@@ -29,6 +29,7 @@ const Contents = () => {
                 item                                //else
         );
         setItems(listItems)
+        localStorage.setItem('shoppinglist',JSON.stringify(listItems))
     }
 
 
@@ -39,7 +40,8 @@ const Contents = () => {
                 {items.map((item)=> (
                     <li className='item' key={item.id}>
                         <input onChange={()=>handleCheck(item.id)} checked={item.checked } type="checkbox" />
-                    <label>{item.item}</label>
+                        <label style={(item.checked)?{textDecoration:'line-through'}:null }
+                         onDoubleClick={() => handleCheck(item.id)} >{item.item}</label>
                     <FaTrashAlt role="button" tabIndex="0"/>
                     </li>
                     
