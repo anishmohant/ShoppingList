@@ -2,7 +2,7 @@ import React from 'react'
 import { FaTrashAlt } from 'react-icons/fa'
 const LineItem = ({item, handleDelete, handleCheck}) => {
   return (
-      <li className='item' key={item.id}>
+      <li className='item' >
           <input onChange={() => handleCheck(item.id)} checked={item.checked} type="checkbox" />
           <label style={(item.checked) ? { textDecoration: 'line-through' } : null}
               onDoubleClick={() => handleCheck(item.id)} >{item.item}</label>
@@ -11,4 +11,4 @@ const LineItem = ({item, handleDelete, handleCheck}) => {
   )
 }
 
-export default LineItem
+export default LineItem 
