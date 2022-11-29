@@ -9,14 +9,35 @@ import React, { useEffect, useState } from 'react'
 
 
 function App() {
+  const API_URL = 'http://localhost:3500/items'
+  const [isLoading, setIsLoading] = useState(true)
 
-  const [items, setItems] = useState(JSON.parse(localStorage.getItem('shoppinglist')) || [])
+  const [items, setItems] = useState([])
   const [newItem, setNewItem] = useState('')
   const [search, setSearch] = useState('')
+  const [fetchError, setFetchError] = useState(null)
   useEffect(() => {
-    localStorage.setItem('shoppinglist', JSON.stringify(items))
-    }, [items])
-  
+    const fetchItems = async () => {
+      try {
+        const response = await fetch(API_URL)
+        if (!response.ok) throw Error("Could not connect ")
+        const listItems = await response.json()
+        console.log(listItems)
+        setItems(listItems)
+        setFetchError(null)
+      } catch (error) {
+        setFetchError(error.message)
+      }
+      finally{
+        setIsLoading(false)
+      }
+    }
+    setTimeout(() => {
+      
+      (async () => await fetchItems())();
+    }, 2000 );
+  }, [])
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -52,16 +73,20 @@ function App() {
       <Header title="Grocery" />
       <AddItem handleSubmit={handleSubmit} newItem={newItem} setNewItem={setNewItem} />
       <SearchItem search={search} setSearch={setSearch} />
-      <Contents
-        handleCheck={handleCheck}
-        handleDelete={handleDelete}
-        setItems={setItems} 
-        items={items.filter(
-          item => (
-            (item.item).toLowerCase().includes(search.toLocaleLowerCase())
+      <main>
+        {isLoading && <p>Loading items...</p>}
+        {fetchError && <p style={{ color: 'red' }}>{`Error : ${fetchError}`}</p>}
+        {!fetchError && !isLoading && <Contents
+          handleCheck={handleCheck}
+          handleDelete={handleDelete}
+          setItems={setItems}
+          items={items.filter(
+            item => (
+              (item.item).toLowerCase().includes(search.toLocaleLowerCase())
             )
           )}
-        />
+        />}
+      </main>
       <Footer length={items.length} />
     </div>
   );
