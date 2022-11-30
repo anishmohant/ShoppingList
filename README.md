@@ -6,10 +6,10 @@
     ☑
   </a>
 
-  <h3 align="center">Grocery List</h3>
+  <h3 align="center">Shopping List</h3>
 
   <p align="center">
-    An awesome Grocery List developed with React!
+    An awesome Grocery List developed with React! <br/><a href="https://anishmohant.github.io/ShoppingList/">View DEMO</a>
     <br />
     <br />
     <br />
