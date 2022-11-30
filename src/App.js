@@ -49,7 +49,7 @@ function App() {
   }
   return (
     <div className="App">
-      <Header title="Grocery" />
+      <Header title="Shopping List" />
       <AddItem handleSubmit={handleSubmit} newItem={newItem} setNewItem={setNewItem} />
       <SearchItem search={search} setSearch={setSearch} />
       <Contents
